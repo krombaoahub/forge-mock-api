@@ -21,7 +21,7 @@ export const LoginWithGoogle: React.FC<React.HTMLAttributes<HTMLDivElement>> = (
     };
 
     return (
-        env.MODE == DEVELOPMENT && <>
+        env.MODE !== DEVELOPMENT && <>
             <div className={cn("flex justify-center w-full", className)} {...props}>
                 <button onClick={handleGoogleLogin} type="submit" className='w-full btn btn-soft'>Login with Google</button>
             </div>

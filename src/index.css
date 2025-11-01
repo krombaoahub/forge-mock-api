@@ -1,36 +1,42 @@
 @import "tailwindcss";
 @plugin "@iconify/tailwind4";
 
-@plugin "flyonui";
+/* @plugin "flyonui"; */
+@plugin "flyonui" {
+  themes: dark --default, light --prefersdark, black, claude, corporate, ghibli, gourmet, luxury, mintlify, pastel, perplexity, shadcn, slack, soft, spotify, valorant, vscode;
+}
+
 /* Require only if you want to use FlyonUI JS component */
 /* @import "../node_modules/flyonui/variants.css";  */
 @import "../node_modules/flyonui/variants.css";
 
 /* Require only if you want to use FlyonUI JS component */
-@source "../node_modules/flyonui/dist/index.js"; 
+@source "../node_modules/flyonui/dist/index.js";
 
- :root {
+:root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* background-color: #242424; */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  color: var(--color-base-content)
 }
 
-body {
+/* body {
   margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-}
+} */
 
 /*
 a {

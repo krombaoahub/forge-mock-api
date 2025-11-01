@@ -3,7 +3,7 @@ import type React from "react";
 const AuthLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
     return (
-        <div className="flex w-full mx-auto">
+        <div className="min-h-lvh items-center flex m-auto max-w-md text-center">
             {children}
         </div>
     )

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { registerFormSchema, type RegisterFormFields } from '@/zod/schema';
@@ -6,12 +5,12 @@ import AuthLayout from '@/layouts/auth-layout';
 import '@/App.css'
 import { FormField } from '@/components/forms';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '@/context/AuthContext';
+import { useAuthContext } from '@/context/AuthContext';
+import AppLogo from '@/components/logo';
 
-
-const RegisterPage: React.FC = () => {
+export default function RegisterPage() {
     const navigate = useNavigate()
-    const {handleRegister, errorMsg, loading} = useAuth()
+    const { handleRegister, errorMsg, loading } = useAuthContext()
 
     const {
         register,
@@ -23,9 +22,10 @@ const RegisterPage: React.FC = () => {
 
     return (
         <AuthLayout>
-            <div className='w-full'>
+            <div className='w-full border rounded-md border-zinc-500'>
                 <div className="card max-w-md">
                     <div className="card-body">
+                        <AppLogo className='mx-auto' logoOnly={true} />
                         <h5 className="card-title mb-2.5">Sign Up</h5>
                         <p className="mb-4">Join us by creating an account.</p>
                         <div className="card-actions gap-5">
@@ -82,7 +82,7 @@ const RegisterPage: React.FC = () => {
 
                             <div className='mx-auto w-full'>
                                 <span className='me-2'> Already have an account?</span>
-                                <Link to={'/login'} className="link link-accent link-animated">Login here</Link>
+                                <Link to={'/login'} className="link link-accent link-animated hover:text-base-content">Login here</Link>
                             </div>
                         </div>
                     </div>
@@ -91,5 +91,3 @@ const RegisterPage: React.FC = () => {
         </AuthLayout>
     );
 };
-
-export default RegisterPage;

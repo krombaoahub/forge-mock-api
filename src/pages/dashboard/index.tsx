@@ -1,11 +1,10 @@
-import { useAuth } from "@/context/AuthContext";
+import { useAuthContext } from "@/context/AuthContext";
 import { DashboardLayout } from "@/layouts/dashboard-layout";
-import type React from "react";
 import { useNavigate } from "react-router-dom";
 
-const DashboardPage: React.FC = () => {
+export default function DashboardPage() {
     const navigate = useNavigate()
-    const { currentUser, handleLogout, loading } = useAuth();
+    const { currentUser, handleLogout, loading } = useAuthContext();
     const { email } = currentUser;
     console.log(currentUser)
     return (
@@ -21,5 +20,3 @@ const DashboardPage: React.FC = () => {
         </DashboardLayout>
     )
 }
-
-export default DashboardPage;

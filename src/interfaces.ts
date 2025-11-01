@@ -51,3 +51,7 @@ export interface SaveUserProfileProps {
     email: string,
     name: string
 }
+
+export interface AppLogoProps extends React.HTMLAttributes<HTMLDivElement> {
+    logoOnly?: boolean
+}

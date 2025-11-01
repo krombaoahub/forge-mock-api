@@ -6,12 +6,12 @@ import '@/App.css'
 import { FormField } from '@/components/forms';
 import { Link, useNavigate } from 'react-router-dom';
 import { LoginWithGoogle } from '@/components/login-with-button';
-import { useAuth } from '@/context/AuthContext';
+import { useAuthContext } from '@/context/AuthContext';
+import AppLogo from '@/components/logo';
 
-
-const LoginPage: React.FC = () => {
+export default function LoginPage() {
     const navigate = useNavigate()
-    const { handleLogin, errorMsg, loading } = useAuth()
+    const { handleLogin, errorMsg, loading } = useAuthContext()
     
     const {
         register,
@@ -23,11 +23,12 @@ const LoginPage: React.FC = () => {
 
     return (
         <AuthLayout>
-            <div className='w-full'>
+            <div className='w-full border rounded-md border-zinc-500'>
                 <div className="card max-w-md">
                     <div className="card-body">
+                        <AppLogo className='mx-auto' logoOnly={true} />
                         <h5 className="card-title mb-2.5">Sign In</h5>
-                        <p className="mb-4">Login your ApiForge account.</p>
+                        <p className="mb-4">Login your ForgeMockAPI account.</p>
                         <div className="card-actions gap-5">
 
                             <div className={`${errors.root?.message || errorMsg ? 'rounded border p-5 alert-error alert-soft w-full alert' : 'hidden'}`}>
@@ -67,7 +68,7 @@ const LoginPage: React.FC = () => {
                                 <LoginWithGoogle />
                                 <div>
                                     <span className='me-2'>Don't have an account?</span>
-                                    <Link to={'/register'} className="link link-accent link-animated">Sign up</Link>
+                                    <Link to={'/register'} className="link link-accent link-animated hover:text-base-content">Sign up</Link>
                                 </div>
 
                             </div>
@@ -78,5 +79,3 @@ const LoginPage: React.FC = () => {
         </AuthLayout>
     );
 };
-
-export default LoginPage;
