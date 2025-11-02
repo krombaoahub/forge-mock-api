@@ -1,35 +1,26 @@
 // src/context/AuthContext.js
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
-import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { createContext, useContext, useState, type ReactNode } from 'react';
+import { signOut } from 'firebase/auth';
 import { auth } from '../firebase';
 import type { AuthContextProps, LoginFormProps, RegisterFormProps } from '@/interfaces';
 import type { AuthResultType } from '@/types';
 import { loginAccount, registerAccount } from '@/services/auth';
 import { Outlet, type NavigateFunction } from 'react-router-dom';
+import { useOnAuthStateChanged } from '@/hooks/use-on-auth';
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-    // const navigate = useNavigate()
-    // const { pathname } = useLocation()
     const [currentUser, setCurrentUser] = useState<any>(null);
     const [authLoading, setAuthLoading] = useState<boolean>(true);
     const [loading, setLoading] = useState<boolean>(false);
     const [errorMsg, setErrorMsg] = useState<string>('');
 
-    // useEffect(() => setErrorMsg(''), [pathname])
-
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, user => {
-            setCurrentUser(user);
-            setAuthLoading(false)
-        });
-        return unsubscribe; // Cleanup subscription on unmount
-    }, []);
+    useOnAuthStateChanged({ setCurrentUser, setAuthLoading })
 
     const handleLogin = async (loginField: LoginFormProps, navigate: NavigateFunction) => {
         setLoading(true)
-        await loginAccount(loginField)
+        await loginAccount(loginField, setCurrentUser)
             .then((result: AuthResultType) => {
                 if (result.success) navigate('/dashboard');
                 if (result.message) setErrorMsg(result.message);
@@ -37,6 +28,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             .finally(() => setLoading(false))
 
     }
+
     const handleLogout = (navigate: NavigateFunction) => {
         setErrorMsg('')
         setLoading(true)

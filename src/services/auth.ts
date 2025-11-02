@@ -3,6 +3,7 @@ import type { LoginFormProps, RegisterFormProps } from "../interfaces";
 import { auth } from "@/firebase";
 import { saveUserProfile } from "./user-service";
 import type { AuthResultType } from "@/types";
+import type { UserImplProps } from "@/interfaces/firebaseAuth";
 
 export const registerAccount = async (data: RegisterFormProps): Promise<AuthResultType> => {
     const { email, password, name } = data
@@ -34,7 +35,7 @@ export const registerAccount = async (data: RegisterFormProps): Promise<AuthResu
 
     return result
 };
-export const loginAccount = async ({ email, password }: LoginFormProps): Promise<AuthResultType> => {
+export const loginAccount = async ({ email, password }: LoginFormProps, setCurrentUser: (e: UserImplProps | null) => void): Promise<AuthResultType> => {
 
     let result: AuthResultType = { success: true, message: '', data: {} }
 
@@ -43,7 +44,9 @@ export const loginAccount = async ({ email, password }: LoginFormProps): Promise
             .then(async (credential) => {
                 // Signed in
                 const user = credential.user;
-                console.log(user);
+                setCurrentUser(user);
+                console.log("User Profile:", user);
+                console.log(' Signed in:');
             })
 
     } catch (err: any) {

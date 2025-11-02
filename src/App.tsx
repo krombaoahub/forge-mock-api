@@ -1,12 +1,12 @@
-import $ from 'jquery';
+// import $ from 'jquery';
 import _ from 'lodash';
 import { useFlyOnUI } from './hooks/use-init-flyoui';
 import { AppRoutes } from './routes';
 import { Suspense } from 'react';
 
-window.$ = $;
+// window.$ = $;
+// window.jQuery = $;
 window._ = _;
-window.jQuery = $;
 
 function App() {
 

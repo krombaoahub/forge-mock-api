@@ -1,51 +1,99 @@
-import { useAppearance } from "@/hooks/use-appearance";
 import AppLogo from "./logo";
 import { Link } from "react-router-dom";
+import { List } from "lucide-react";
+import ThemeDropdown from "./theme-dropdown";
+import { useEffect, useRef, useState } from "react";
+import { useOutsideClickDetector } from "@/hooks/use-click-outside";
+import { HSAccordion } from "flyonui/flyonui";
+import type { HeaderProps } from "@/interfaces";
+import { useGotoSection } from "@/hooks/use-goto-section";
+import { UserDropdownMenu } from "./user-dropdown-menu";
 
-export default function Header() {
-    const { appearance, updateAppearance } = useAppearance()
+type HSAccordionType = HSAccordion | undefined;
+
+export default function Header({ dashboardHeader }: HeaderProps) {
+    const [accordionHS, setAccordionHS] = useState<HSAccordionType>(undefined)
+
+    const accordionRef = useRef(null);
+
+    let accordion: HSAccordionType = undefined
+
+    const isClickedOutside = useOutsideClickDetector(accordionRef)
+
+    useEffect(() => {
+        if (accordionRef.current) {
+            console.log(accordionHS, typeof accordion)
+            if (accordion == undefined) {
+                accordion = new HSAccordion(accordionRef.current)
+                setAccordionHS(accordion)
+            }
+        }
+    }, [])
+
+    useEffect(() => {
+        if (accordionHS && isClickedOutside) {
+            accordionHS.hide()
+        }
+    }, [isClickedOutside])
+
+    const handleGotoSection = useGotoSection()
 
     return (
         <header className='w-full [&>.link]:text-white shadow-md p-4 fixed [&>div]:max-w-7xl z-50 bg-base-200/65 backdrop-blur-md ' >
-            <div className='mx-auto gap-5 flex justify-between items-center '>
-                <AppLogo />
-                <div className='flex gap-5'>
-                    <div className='link link-animated hover:text-base-content'>Features</div>
-                    <div className='link link-animated hover:text-base-content'>Documentation</div>
-                    <div className='link link-animated hover:text-base-content'>Pricing</div>
-                </div>
+            {dashboardHeader ? <div className='mx-auto gap-5 justify-between items-center lg:flex  hidden'>
+                <div className='flex gap-5 items-center'>
+                    <AppLogo /></div>
                 <div className="flex gap-5 items-center">
-                    <Link to={'/login'} className=' link link-animated hover:text-base-content'>Sign In</Link>
-                    <div>
-                        <button className='btn btn-primary'>Get Started Free</button>
+                    <div onClick={() => handleGotoSection('featureRef')} className='link link-animated hover:text-base-content'>Features</div>
+                    <div onClick={() => handleGotoSection('documentationRef')} className='link link-animated hover:text-base-content'>Documentation</div>
+                    <div onClick={() => handleGotoSection('pricingRef')} className='link link-animated hover:text-base-content'>Pricing</div>
+
+                    <UserDropdownMenu />
+                </div>
+            </div> : <>
+
+                <div className='mx-auto gap-5 justify-between items-center lg:flex  hidden'>
+                    <AppLogo />
+                    <div className='flex gap-5'>
+                        <div onClick={() => handleGotoSection('featureRef')} className='link link-animated hover:text-base-content'>Features</div>
+                        <div onClick={() => handleGotoSection('documentationRef')} className='link link-animated hover:text-base-content'>Documentation</div>
+                        <div onClick={() => handleGotoSection('pricingRef')} className='link link-animated hover:text-base-content'>Pricing</div>
                     </div>
-                    <div className="dropdown relative inline-flex">
-                        <button id="dropdown-default" type="button" className="dropdown-toggle btn btn-primary capitalize" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-                            Theme {appearance}
-                            <span className="icon-[tabler--chevron-down] dropdown-open:rotate-180 size-4"></span>
-                        </button>
-                        <ul className="dropdown-menu dropdown-open:opacity-100 hidden min-w-60" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-default">
-                            <li onClick={() => updateAppearance('light')}><div className='link link-animated hover:text-base-content px-6 py-2 w-full capitalize'>light</div></li>
-                            <li onClick={() => updateAppearance('dark')}><div className='link link-animated hover:text-base-content px-6 py-2 w-full capitalize'>dark</div></li>
-                            <li onClick={() => updateAppearance('black')}><div className='link link-animated hover:text-base-content px-6 py-2 w-full capitalize'>black</div></li>
-                            <li onClick={() => updateAppearance('claude')}><div className='link link-animated hover:text-base-content px-6 py-2 w-full capitalize'>claude</div></li>
-                            <li onClick={() => updateAppearance('corporate')}><div className='link link-animated hover:text-base-content px-6 py-2 w-full capitalize'>corporate</div></li>
-                            <li onClick={() => updateAppearance('ghibli')}><div className='link link-animated hover:text-base-content px-6 py-2 w-full capitalize'>ghibli</div></li>
-                            <li onClick={() => updateAppearance('gourmet')}><div className='link link-animated hover:text-base-content px-6 py-2 w-full capitalize'>gourmet</div></li>
-                            <li onClick={() => updateAppearance('luxury')}><div className='link link-animated hover:text-base-content px-6 py-2 w-full capitalize'>luxury</div></li>
-                            <li onClick={() => updateAppearance('mintlify')}><div className='link link-animated hover:text-base-content px-6 py-2 w-full capitalize'>mintlify</div></li>
-                            <li onClick={() => updateAppearance('pastel')}><div className='link link-animated hover:text-base-content px-6 py-2 w-full capitalize'>pastel</div></li>
-                            <li onClick={() => updateAppearance('perplexity')}><div className='link link-animated hover:text-base-content px-6 py-2 w-full capitalize'>perplexity</div></li>
-                            <li onClick={() => updateAppearance('shadcn')}><div className='link link-animated hover:text-base-content px-6 py-2 w-full capitalize'>shadcn</div></li>
-                            <li onClick={() => updateAppearance('slack')}><div className='link link-animated hover:text-base-content px-6 py-2 w-full capitalize'>slack</div></li>
-                            <li onClick={() => updateAppearance('soft')}><div className='link link-animated hover:text-base-content px-6 py-2 w-full capitalize'>soft</div></li>
-                            <li onClick={() => updateAppearance('spotify')}><div className='link link-animated hover:text-base-content px-6 py-2 w-full capitalize'>spotify</div></li>
-                            <li onClick={() => updateAppearance('valorant')}><div className='link link-animated hover:text-base-content px-6 py-2 w-full capitalize'>valorant</div></li>
-                            <li onClick={() => updateAppearance('vscode')}><div className='link link-animated hover:text-base-content px-6 py-2 w-full capitalize'>vscode</div></li>
-                        </ul>
+                    <div className="flex gap-5 items-center">
+                        <Link to={'/login'} className=' link link-animated hover:text-base-content'>Sign In</Link>
+                        <div>
+                            <button className='btn btn-primary'>Get Started Free</button>
+                        </div>
+                        <ThemeDropdown />
                     </div>
                 </div>
-            </div>
+
+                <div className='mx-auto gap-5 justify-between items-center lg:hidden block'>
+                    <div className="accordion">
+                        <div className="accordion-item" ref={accordionRef}>
+                            <div className="flex justify-between w-full items-center">
+                                <AppLogo />
+                                <div>
+                                    <button className="accordion-toggle inline-flex items-center p-0 gap-x-4 text-start" aria-controls="nav-menu-hamburger" aria-expanded="false" >
+                                        <List />
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="nav-menu-hamburger" className="mt-5 accordion-content hidden w-full overflow-hidden transition-[height] duration-200" aria-labelledby="cancel-basic" role="region" >
+                                <div className="px-2 pb-4 flex flex-col gap-2">
+                                    <div onClick={() => handleGotoSection('featureRef')} className='link link-animated hover:text-base-content'>Features</div>
+                                    <div onClick={() => handleGotoSection('documentationRef')} className='link link-animated hover:text-base-content'>Documentation</div>
+                                    <div onClick={() => handleGotoSection('pricingRef')} className='link link-animated hover:text-base-content'>Pricing</div>
+                                    <div className='link link-animated hover:text-base-content'>Get Started Free</div>
+                                    <Link to={'/login'} className=' link link-animated hover:text-base-content'>Sign In</Link>
+
+                                    <ThemeDropdown />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </>}
         </header>
     )
 }
