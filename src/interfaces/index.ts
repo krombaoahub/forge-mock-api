@@ -39,19 +39,25 @@ export interface PasswordMeterProps {
 
 // User
 export interface AuthContextProps {
-    currentUser: any | null;
-    loading: boolean;
-    errorMsg: string;
+    currentUser: any | null
+    loading: boolean
+    errorMsg: string
     handleRegister: (data: RegisterFormProps, navigate: NavigateFunction) => {}
     handleLogin: (loginField: LoginFormProps, navigate: NavigateFunction) => {}
     handleLogout: (navigate: NavigateFunction) => void
 }
 
 export interface SaveUserProfileProps {
-    email: string,
+    email: string
     name: string
+    phoneNumber?: string
+    photoURL?: string
 }
 
 export interface AppLogoProps extends React.HTMLAttributes<HTMLDivElement> {
     logoOnly?: boolean
+}
+
+export interface HeaderProps {
+    dashboardHeader?: boolean
 }

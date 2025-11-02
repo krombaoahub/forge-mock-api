@@ -5,7 +5,7 @@ import RegisterPage from "@/pages/register";
 import type { JSX } from "react";
 import type React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import LandingPage from "@/pages/LandingPage";
+import LandingPage from "@/pages/landing";
 
 export const AppRoutes: React.FC = () => {
     const { currentUser } = useAuthContext();
@@ -28,5 +28,5 @@ interface PropsInterface {
 
 export const ProtectedRoute = ({ children }: PropsInterface) => {
     const { currentUser } = useAuthContext();
-    return currentUser ? children : <Navigate to="/login" replace />;
+    return currentUser ? children : <Navigate to="/" replace />;
 };
