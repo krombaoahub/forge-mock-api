@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             .finally(() => setLoading(false))
     };
 
-    const context = { currentUser, loading, errorMsg, handleRegister, handleLogin, handleLogout };
+    const context = { currentUser, loading, errorMsg, handleRegister, handleLogin, handleLogout, setErrorMsg };
 
     return (
         <AuthContext.Provider value={context}>

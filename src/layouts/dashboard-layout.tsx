@@ -7,8 +7,8 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ child
     return (
         <div className="flex flex-col w-full mx-auto">
             <Header dashboardHeader />
-            <main className="mt-18 min-h-[90dvh]">
-                <section className="w-full min-h-[90dvh] [&>div]:max-w-7xl py-10 bg-primary/15">
+            <main className="mt-18 min-h-[80dvh]">
+                <section className="w-full min-h-[80dvh] [&>div]:max-w-7xl py-10 bg-secondary/15">
                     <div className='mx-auto flex flex-col'>{children}</div>
                 </section>
             </main>

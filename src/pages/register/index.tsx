@@ -7,18 +7,37 @@ import { FormField } from '@/components/forms';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '@/context/AuthContext';
 import AppLogo from '@/components/logo';
+import { useEffect, useState } from 'react';
+import { useAppContext } from '@/context/AppContext';
 
 export default function RegisterPage() {
     const navigate = useNavigate()
-    const { handleRegister, errorMsg, loading } = useAuthContext()
+    const { handleRegister, errorMsg, loading, setErrorMsg } = useAuthContext()
+    const [errorToast, setErrorToast] = useState<boolean>(false)
+    const { delayTimer } = useAppContext()
 
     const {
         register,
         handleSubmit,
         formState: { errors },
+        reset
     } = useForm<RegisterFormFields>({
         resolver: zodResolver(registerFormSchema),
     });
+
+    useEffect(() => {
+        if (errorMsg || errors.root?.message) {
+            setErrorToast(true)
+            delayTimer(() => {
+                setErrorToast(false)
+                setErrorMsg('')
+            }, 2500)
+        }
+    }, [errorMsg, errors.root?.message]);
+
+    useEffect(() => {
+        return () => reset(); // cleanup on unmount
+    }, []);
 
     return (
         <AuthLayout>
@@ -30,7 +49,7 @@ export default function RegisterPage() {
                         <p className="mb-4">Join us by creating an account.</p>
                         <div className="card-actions gap-5">
 
-                            <div className={`${errors.root?.message || errorMsg ? 'rounded border p-5 alert-error alert-soft w-full alert' : 'hidden'}`}>
+                            <div className={`transition-all rounded border alert-error alert-soft w-full alert ${!errorToast ? 'p-0 opacity-0' : 'p-5 opacity-100 '}`}>
                                 {errors.root?.message && (
                                     <small className="font-medium">{errors.root.message}</small>
                                 )}

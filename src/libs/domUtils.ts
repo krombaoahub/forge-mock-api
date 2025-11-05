@@ -50,7 +50,7 @@ export const getAllBySelector = <T extends HTMLElement>(selector: string, contex
  * @param context - The parent element to search within.
  * @returns A static NodeList of elements.
  */
-export const getByAttribute = <T extends HTMLElement>(
+export const getAllByAttribute = <T extends HTMLElement>(
     attributeName: string,
     attributeValue?: string,
     context: HTMLElement | Document = document
@@ -59,7 +59,27 @@ export const getByAttribute = <T extends HTMLElement>(
     if (attributeValue !== undefined) {
         selector = `[${attributeName}="${attributeValue}"]`;
     }
+
     return context.querySelectorAll(selector);
+};
+/**
+ * Get a list of elements by a specific attribute name and optional value.
+ * @param attributeName - The name of the attribute (e.g., 'data-testid').
+ * @param attributeValue - The optional value of the attribute.
+ * @param context - The parent element to search within.
+ * @returns A static NodeList of elements.
+ */
+export const getByAttribute = <T extends HTMLElement>(
+    attributeName: string,
+    attributeValue?: string,
+    context: HTMLElement | Document = document
+): T | null => {
+    let selector = `[${attributeName}]`;
+    if (attributeValue !== undefined) {
+        selector = `[${attributeName}="${attributeValue}"]`;
+    }
+
+    return context.querySelector(selector);
 };
 
 /**

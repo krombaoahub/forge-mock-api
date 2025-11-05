@@ -8,18 +8,37 @@ import { Link, useNavigate } from 'react-router-dom';
 import { LoginWithGoogle } from '@/components/login-with-button';
 import { useAuthContext } from '@/context/AuthContext';
 import AppLogo from '@/components/logo';
+import { useEffect, useState } from 'react';
+import { useAppContext } from '@/context/AppContext';
 
 export default function LoginPage() {
     const navigate = useNavigate()
-    const { handleLogin, errorMsg, loading } = useAuthContext()
-    
+    const [errorToast, setErrorToast] = useState<boolean>(false)
+    const { handleLogin, errorMsg, loading ,setErrorMsg} = useAuthContext()
+    const { delayTimer } = useAppContext()
+
     const {
         register,
         handleSubmit,
         formState: { errors },
+        reset
     } = useForm<LoginFormFields>({
         resolver: zodResolver(loginFormSchema),
     });
+
+    useEffect(() => {
+        if (errorMsg || errors.root?.message) {
+            setErrorToast(true)
+            delayTimer(() => {
+                setErrorToast(false)
+                setErrorMsg('')
+            }, 2500)
+        }
+    }, [errorMsg, errors.root?.message]);
+
+    useEffect(() => {
+        return () => reset(); // cleanup on unmount
+    }, []);
 
     return (
         <AuthLayout>
@@ -31,12 +50,13 @@ export default function LoginPage() {
                         <p className="mb-4">Login your ForgeMockAPI account.</p>
                         <div className="card-actions gap-5">
 
-                            <div className={`${errors.root?.message || errorMsg ? 'rounded border p-5 alert-error alert-soft w-full alert' : 'hidden'}`}>
+                            <div className={`transition-all rounded border alert-error alert-soft w-full alert ${!errorToast ? 'p-0 opacity-0' : 'p-5 opacity-100 '}`}>
                                 {errors.root?.message && (
                                     <small className="font-medium">{errors.root.message}</small>
                                 )}
                                 {errorMsg && <small className='text-red-500'>{errorMsg}</small>}
                             </div>
+
                             <FormField handleSubmit={handleSubmit((data) => handleLogin(data, navigate))} className='w-full' inputs={[{
                                 className: 'border-0 border-b-1 rounded-none rounded-t',
                                 register,
@@ -61,7 +81,7 @@ export default function LoginPage() {
                                     </button>
                                 </div>
                             </FormField>
-                            
+
                             <div className="divider">OR</div>
 
                             <div className='mx-auto w-full gap-5 flex flex-col'>

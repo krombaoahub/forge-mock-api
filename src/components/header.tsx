@@ -61,9 +61,10 @@ export default function Header({ dashboardHeader }: HeaderProps) {
                     </div>
                     <div className="flex gap-5 items-center">
                         <Link to={'/login'} className=' link link-animated hover:text-base-content'>Sign In</Link>
-                        <div>
+                        <Link to={'/login'}>
                             <button className='btn btn-primary'>Get Started Free</button>
-                        </div>
+                        </Link>
+
                         <ThemeDropdown />
                     </div>
                 </div>
@@ -84,7 +85,9 @@ export default function Header({ dashboardHeader }: HeaderProps) {
                                     <div onClick={() => handleGotoSection('featureRef')} className='link link-animated hover:text-base-content'>Features</div>
                                     <div onClick={() => handleGotoSection('documentationRef')} className='link link-animated hover:text-base-content'>Documentation</div>
                                     <div onClick={() => handleGotoSection('pricingRef')} className='link link-animated hover:text-base-content'>Pricing</div>
-                                    <div className='link link-animated hover:text-base-content'>Get Started Free</div>
+                                    <Link to={'/login'}>
+                                        <div className='link link-animated hover:text-base-content'>Get Started Free</div>
+                                    </Link>
                                     <Link to={'/login'} className=' link link-animated hover:text-base-content'>Sign In</Link>
 
                                     <ThemeDropdown />
