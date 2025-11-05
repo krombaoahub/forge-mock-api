@@ -6,7 +6,6 @@ import type { JSX } from "react";
 import type React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import LandingPage from "@/pages/landing";
-import { ProjectProvider } from "@/context/ProjectContext";
 
 export const AppRoutes: React.FC = () => {
     const { currentUser } = useAuthContext();

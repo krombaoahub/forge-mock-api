@@ -16,7 +16,7 @@ const ProjectTable: React.FC = () => {
     const [buttonPages, setButtonPages] = useState<{ startPage: number, endPage: number }>({ startPage: 1, endPage: 3 });
     const [itemsToDisplay, setItemsToDisplay] = useState<DocumentData[]>(projects.slice(0, itemsPerPage))
 
-    console.log('Projects in table:', JSON.stringify(projects));
+    //console.log('Projects in table:', JSON.stringify(projects));
     const searchRef = useRef<HTMLInputElement>(null);
 
     const totalPages = useMemo(() => Math.ceil(itemLength / itemsPerPage), [itemLength]);

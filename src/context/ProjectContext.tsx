@@ -16,14 +16,14 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
     const [projects, setProjects] = useState<ProjectResultType>([])
 
     const handleGetProject = useCallback(async () => {
-        console.log('Getting projects for user:', currentUser)
+        //console.log('Getting projects for user:', currentUser)
         return await getProjectByUserId(currentUser.localId)
             .then((data) => setProjects(data))
             .catch((error) => setErrorMsg(error.message))
     }, [currentUser.localId])
 
     useEffect(() => {
-        console.log('Fetching projects...')
+        //console.log('Fetching projects...')
         setProviderLoading(true)
         handleGetProject().finally(() => {
             setProviderLoading(false);
@@ -36,7 +36,7 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
         setLoading(true)
         await createProject(currentUser.localId, data.name)
             .then((docRef) => {
-                console.log("New projects added with ID:", docRef.id);
+                //console.log("New projects added with ID:", docRef.id);
                 callback && callback()
             })
             .catch((error) => setErrorMsg(error.message))

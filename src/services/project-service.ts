@@ -2,7 +2,7 @@ import { PROJECTS } from "@/contants/collections";
 import { faker } from "@faker-js/faker";
 import { db } from "@/firebase";
 import { timestamp } from "@/libs/utils";
-import { addDoc, collection, deleteDoc, doc, getDocs, orderBy, query, where, type DocumentData } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, query, where, type DocumentData } from "firebase/firestore";
 
 export async function createProject(uuid: string, name: string) {
     const projectRef = collection(db, PROJECTS);
@@ -38,7 +38,7 @@ export async function getProjectByUserId(uuid: string): Promise<DocumentData[]> 
             }
         })
     } else {
-        console.log("No such document!");
+        //console.log("No such document!");
         return [];
     }
 }
@@ -50,7 +50,7 @@ export async function deleteProject(uuid: string): Promise<boolean> {
     try {
         // Delete the document
         await deleteDoc(projectRef);
-        console.log("Document successfully deleted!");
+        //console.log("Document successfully deleted!");
         return true
     } catch (error) {
         console.error("Error removing document: ", error);

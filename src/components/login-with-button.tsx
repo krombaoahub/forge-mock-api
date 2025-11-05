@@ -11,7 +11,7 @@ export const LoginWithGoogle: React.FC<React.HTMLAttributes<HTMLDivElement>> = (
         try {
             const result = await signInWithPopup(auth, provider);
             const user = result.user;
-            console.log("Logged in user:", user);
+            //console.log("Logged in user:", user);
         } catch (error: any) {
             // Handle errors here.
             const errorCode = error.code;

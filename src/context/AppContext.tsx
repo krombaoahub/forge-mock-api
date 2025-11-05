@@ -1,4 +1,4 @@
-import { createContext, lazy, Suspense, useCallback, useContext, useState, type ReactNode } from 'react';
+import { createContext, lazy, Suspense, useCallback, useContext, type ReactNode } from 'react';
 
 interface AppContextProps {
     delayTimer: (d: any, delayTime?: number) => void
