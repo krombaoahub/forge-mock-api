@@ -22,7 +22,6 @@ export default function Header({ dashboardHeader }: HeaderProps) {
 
     useEffect(() => {
         if (accordionRef.current) {
-            //console.log(accordionHS, typeof accordion)
             if (accordion == undefined) {
                 accordion = new HSAccordion(accordionRef.current)
                 setAccordionHS(accordion)

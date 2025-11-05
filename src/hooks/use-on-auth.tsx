@@ -25,10 +25,8 @@ export function useOnAuthStateChanged({ setCurrentUser, setAuthLoading }: useOnA
                         ...user.reloadUserInfo,
                         ...userDataFromFirestore,
                     };
-                    //console.log('Full user profile from Firestore:', fullUserProfile);
                     setCurrentUser(fullUserProfile);
                 } else {
-                    //console.log('User profile from Firestore:', user);
                     setCurrentUser(user);
                 }
             } else {

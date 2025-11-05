@@ -48,8 +48,6 @@ export const loginAccount = async ({ email, password }: LoginFormProps, setCurre
                 user.localId = credential.user.uid;
 
                 setCurrentUser(user);
-                //console.log("User Profile:", user);
-                //console.log(' Signed in:');
             })
 
     } catch (err: any) {

@@ -8,7 +8,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "deploy:hosting": "npm run build && firebase deploy --only hosting"
+    "deploy:hosting": "npm run build && firebase deploy --only hosting",
+    "deploy:hosting:forgemockapi": "npm run build && firebase deploy --only hosting:forgemockapi",
+    "firebase:emulator": "npm run build && firebase emulators:start"
   },
   "dependencies": {
     "@faker-js/faker": "^10.1.0",
