@@ -1,4 +1,5 @@
 import { Clock, CreditCard, Rocket, TestTubeDiagonal } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function ReadyToSetup() {
     return (
@@ -9,7 +10,9 @@ export default function ReadyToSetup() {
                     <p className="md:text-xl max-w-2xl mx-auto">Join thousands of developers who are building faster with MockAPI. Create your first mock API in under 30 seconds.</p>
                 </div>
                 <div className='flex md:flex-row flex-col gap-4 justify-center items-center'>
-                    <button className='btn hover:bg-white/75 bg-white shadow-2xs btn-xl text-primary border-0'>Start Building Free <Rocket /></button>
+                    <Link to={'/login'}>
+                        <button className='btn hover:bg-white/75 bg-white shadow-2xs btn-xl text-primary border-0'>Start Building Free <Rocket /></button>
+                    </Link>
                     <div>or</div>
                     <button className='btn hover:bg-white hover:border-transparent border transition-all duration-100 hover:text-primary btn-outline shadow-2xs btn-xl'>See It In Action <TestTubeDiagonal /></button>
                 </div>

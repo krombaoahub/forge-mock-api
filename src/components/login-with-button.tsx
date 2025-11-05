@@ -1,4 +1,4 @@
-import { DEVELOPMENT } from "@/constant";
+import { DEVELOPMENT } from "@/contants";
 import { auth } from "@/firebase";
 import { cn, env } from "@/libs/utils";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";

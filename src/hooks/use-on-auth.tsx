@@ -11,32 +11,31 @@ interface useOnAuthStateChangedProps {
 
 export function useOnAuthStateChanged({ setCurrentUser, setAuthLoading }: useOnAuthStateChangedProps) {
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, async (user) => {
+        const unsubscribe = onAuthStateChanged(auth, async (user: any) => {
 
             if (user) {
-                // Fetch additional data from Firestore using the user's UID
                 const userDocRef = doc(db, 'users', user.uid);
                 const userDocSnap = await getDoc(userDocRef);
 
                 if (userDocSnap.exists()) {
-                    // Combine auth info with firestore info
+
                     const userDataFromFirestore = userDocSnap.data();
+
                     const fullUserProfile = {
-                        ...user, // Basic auth details
-                        ...userDataFromFirestore, // Additional details like phoneNumber
+                        ...user.reloadUserInfo,
+                        ...userDataFromFirestore,
                     };
+                    console.log('Full user profile from Firestore:', fullUserProfile);
                     setCurrentUser(fullUserProfile);
-                    console.log("Full User Profile:", fullUserProfile);
                 } else {
-                    // Document does not exist, just use auth data
+                    console.log('User profile from Firestore:', user);
                     setCurrentUser(user);
-                    console.log("User Profile:", user);
                 }
             } else {
                 setCurrentUser(null);
             }
             setAuthLoading(false);
         });
-        return unsubscribe; // Cleanup subscription on unmount
+        return unsubscribe;
     }, []);
 }

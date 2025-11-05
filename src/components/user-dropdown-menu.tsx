@@ -1,5 +1,6 @@
 import { useAuthContext } from "@/context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import ThemeDropdown from "./theme-dropdown";
 
 interface UserAvatarProps {
     displayInfo?: boolean
@@ -44,6 +45,9 @@ export function UserDropdownMenu() {
                         {loading && <span className="loading loading-spinner"></span>}
                         Sign out
                     </button>
+                </li>
+                <li className="p-3">
+                    <ThemeDropdown />
                 </li>
             </ul>
         </div>

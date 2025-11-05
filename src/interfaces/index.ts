@@ -1,3 +1,4 @@
+import type { DocumentData } from "firebase/firestore"
 import type React from "react"
 import type { FieldErrors, UseFormRegister } from "react-hook-form"
 import type { NavigateFunction } from "react-router-dom"
@@ -37,7 +38,6 @@ export interface PasswordMeterProps {
     targetElement: string
 }
 
-// User
 export interface AuthContextProps {
     currentUser: any | null
     loading: boolean
@@ -45,6 +45,15 @@ export interface AuthContextProps {
     handleRegister: (data: RegisterFormProps, navigate: NavigateFunction) => {}
     handleLogin: (loginField: LoginFormProps, navigate: NavigateFunction) => {}
     handleLogout: (navigate: NavigateFunction) => void
+    setErrorMsg: (msg: string) => void
+}
+
+export interface ProjectContextProps {
+    loading: boolean
+    errorMsg: string
+    projects: DocumentData[]
+    handleCreateProject: (data:any, callback?: () => void) => void
+    handleGetProject: () => void
 }
 
 export interface SaveUserProfileProps {
@@ -56,8 +65,13 @@ export interface SaveUserProfileProps {
 
 export interface AppLogoProps extends React.HTMLAttributes<HTMLDivElement> {
     logoOnly?: boolean
+    logoSize?: number
 }
 
 export interface HeaderProps {
     dashboardHeader?: boolean
+}
+
+export interface CreateProjectModalProps extends React.HTMLAttributes<HTMLElement> {
+    refId: string
 }

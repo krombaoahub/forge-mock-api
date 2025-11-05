@@ -43,15 +43,28 @@ export const loginAccount = async ({ email, password }: LoginFormProps, setCurre
         await signInWithEmailAndPassword(auth, email, password)
             .then(async (credential) => {
                 // Signed in
-                const user = credential.user;
+                const user: any = credential.user;
+                
+                user.localId = credential.user.uid;
+
                 setCurrentUser(user);
                 console.log("User Profile:", user);
                 console.log(' Signed in:');
             })
 
     } catch (err: any) {
-        console.log(JSON.stringify(err))
-        let errMessage = err.message
+
+        let errMessage = err.code
+
+        switch (err.code) {
+            case 'auth/invalid-credential':
+                errMessage = 'Incorrect Username or Password'
+                break;
+
+            default:
+                break;
+        }
+
         result.success = false
         result.message = errMessage
     }

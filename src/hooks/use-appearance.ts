@@ -20,6 +20,11 @@ export type Appearance =
     'valorant' |
     'vscode';
 
+export function initializeTheme() {
+    const savedAppearance = localStorage.getItem('appearance') as Appearance | null;
+    document.documentElement.setAttribute('data-theme', savedAppearance || 'light')
+}
+
 export function useAppearance() {
     const [appearance, setAppearance] = useState<Appearance>('dark');
 

@@ -1,4 +1,4 @@
-import { PRICINGS } from "@/constant";
+import { PRICINGS } from "@/contants";
 import { Check, X } from "lucide-react";
 import React, { useCallback, useState } from "react";
 
@@ -20,7 +20,7 @@ interface PriceCardProps {
 }
 export const PriceCard: React.FC<PriceCardProps> = ({ mostPopular = false, ...props }) => {
     return (
-        <div className="grow relative hover:shadow-2xl hover:-translate-y-[15px] transition-all duration-300 hover:z-50 max-w-md">
+        <div className="grow relative hover:shadow-2xl hover:-translate-y-[15px] transition-all duration-300 hover:z-40 max-w-md">
             {mostPopular && <div className="btn btn-primary btn-sm absolute -top-4 z-50 left-1/2 transform -translate-x-1/2 px-5 rounded-full">Most Popular</div>}
             <div className={`${mostPopular ? 'border border-primary' : ''} card bg-primary/10 p-6 grow `}>
                 <div className="flex flex-col gap-3">

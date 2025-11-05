@@ -1,10 +1,17 @@
+import Footer from "@/components/footer";
+import Header from "@/components/header";
 import type React from "react";
 
 const AuthLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
     return (
-        <div className="min-h-lvh items-center flex m-auto max-w-md text-center">
-            {children}
+
+        <div className="flex flex-col mx-auto ">
+            <Header />
+            <main className="sm:mt-18 mt-8 min-h-dvh items-center flex m-auto max-w-md text-center">
+                <div>{children}</div>
+            </main>
+            <Footer />
         </div>
     )
 

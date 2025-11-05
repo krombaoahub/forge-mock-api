@@ -17,14 +17,16 @@ export const registerFormSchema = z.object({
     path: ['confirmPassword']
 })
 
-// type
-export type RegisterFormFields = z.infer<typeof registerFormSchema>;
-
-// rules
 export const loginFormSchema = z.object({
     email: z.email(),
     password: z.string().min(1, { message: 'Password must not be empty.' })
 })
 
+export const createProjectFormSchema = z.object({
+    name: z.string().min(1, { message: "This field cannot be empty." }),
+})
+
 // type
+export type RegisterFormFields = z.infer<typeof registerFormSchema>;
 export type LoginFormFields = z.infer<typeof loginFormSchema>;
+export type CreateProjectFormSchema = z.infer<typeof createProjectFormSchema>;

@@ -6,6 +6,7 @@ import type { JSX } from "react";
 import type React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import LandingPage from "@/pages/landing";
+import { ProjectProvider } from "@/context/ProjectContext";
 
 export const AppRoutes: React.FC = () => {
     const { currentUser } = useAuthContext();
@@ -15,7 +16,7 @@ export const AppRoutes: React.FC = () => {
             {/* Protected Routes */}
             <Route path="/" element={currentUser ? <Navigate to="/dashboard" replace /> : <LandingPage />}></Route>
             {/* <Route path="/" element={<ProtectedRoute><Navigate to={'/dashboard'} replace /></ProtectedRoute>}></Route> */}
-            <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+            <Route path="/dashboard" element={<ProtectedRoute><><DashboardPage /></></ProtectedRoute>} />
             <Route path="/login" element={currentUser ? <Navigate to="/dashboard" replace /> : <LoginPage />} />
             <Route path="/register" element={currentUser ? <Navigate to="/dashboard" replace /> : <RegisterPage />} />
         </Routes>
