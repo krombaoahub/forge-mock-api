@@ -22,7 +22,6 @@ export default function Header({ dashboardHeader }: HeaderProps) {
 
     useEffect(() => {
         if (accordionRef.current) {
-            console.log(accordionHS, typeof accordion)
             if (accordion == undefined) {
                 accordion = new HSAccordion(accordionRef.current)
                 setAccordionHS(accordion)
@@ -60,8 +59,8 @@ export default function Header({ dashboardHeader }: HeaderProps) {
                         <div onClick={() => handleGotoSection('pricingRef')} className='link link-animated hover:text-base-content'>Pricing</div>
                     </div>
                     <div className="flex gap-5 items-center">
-                        <Link to={'/login'} className=' link link-animated hover:text-base-content'>Sign In</Link>
-                        <Link to={'/login'}>
+                        <Link onClick={() => setTimeout(() => { handleGotoSection('loginRef') }, 100)} to={'/login'} className=' link link-animated hover:text-base-content'>Sign In</Link>
+                        <Link onClick={() => setTimeout(() => { handleGotoSection('loginRef') }, 100)} to={'/login'}>
                             <button className='btn btn-primary'>Get Started Free</button>
                         </Link>
 
@@ -85,10 +84,10 @@ export default function Header({ dashboardHeader }: HeaderProps) {
                                     <div onClick={() => handleGotoSection('featureRef')} className='link link-animated hover:text-base-content'>Features</div>
                                     <div onClick={() => handleGotoSection('documentationRef')} className='link link-animated hover:text-base-content'>Documentation</div>
                                     <div onClick={() => handleGotoSection('pricingRef')} className='link link-animated hover:text-base-content'>Pricing</div>
-                                    <Link to={'/login'}>
+                                    <Link onClick={() => setTimeout(() => { handleGotoSection('loginRef') }, 100)} to={'/login'}>
                                         <div className='link link-animated hover:text-base-content'>Get Started Free</div>
                                     </Link>
-                                    <Link to={'/login'} className=' link link-animated hover:text-base-content'>Sign In</Link>
+                                    <Link onClick={() => setTimeout(() => { handleGotoSection('loginRef') }, 100)} to={'/login'} className=' link link-animated hover:text-base-content'>Sign In</Link>
 
                                     <ThemeDropdown />
                                 </div>
@@ -97,6 +96,6 @@ export default function Header({ dashboardHeader }: HeaderProps) {
                     </div>
                 </div>
             </>}
-        </header>
+        </header >
     )
 }

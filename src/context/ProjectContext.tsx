@@ -16,7 +16,6 @@ export const ProjectProvider = ({ children }: { children: ReactNode }) => {
     const [projects, setProjects] = useState<ProjectResultType>([])
 
     const handleGetProject = useCallback(async () => {
-        console.log('Getting projects for user:', currentUser)
         return await getProjectByUserId(currentUser.localId)
             .then((data) => setProjects(data))
             .catch((error) => setErrorMsg(error.message))

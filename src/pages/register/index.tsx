@@ -9,6 +9,7 @@ import { useAuthContext } from '@/context/AuthContext';
 import AppLogo from '@/components/logo';
 import { useEffect, useState } from 'react';
 import { useAppContext } from '@/context/AppContext';
+import { useGotoSection } from '@/hooks/use-goto-section';
 
 export default function RegisterPage() {
     const navigate = useNavigate()
@@ -39,16 +40,17 @@ export default function RegisterPage() {
         return () => reset(); // cleanup on unmount
     }, []);
 
+
+    const handleGotoSection = useGotoSection()
     return (
         <AuthLayout>
-            <div className='w-full border rounded-md border-zinc-500'>
+            <div className='w-full border rounded-md border-secondary/50'>
                 <div className="card max-w-md">
-                    <div className="card-body">
-                        <AppLogo className='mx-auto' logoOnly={true} />
+                    <div className="card-body ">
+                        <div className="flex mb-2"> <AppLogo className='mx-auto' logoOnly={true} /></div>
                         <h5 className="card-title mb-2.5">Sign Up</h5>
                         <p className="mb-4">Join us by creating an account.</p>
                         <div className="card-actions gap-5">
-
                             <div className={`transition-all rounded border alert-error alert-soft w-full alert ${!errorToast ? 'p-0 opacity-0' : 'p-5 opacity-100 '}`}>
                                 {errors.root?.message && (
                                     <small className="font-medium">{errors.root.message}</small>
@@ -101,7 +103,7 @@ export default function RegisterPage() {
 
                             <div className='mx-auto w-full'>
                                 <span className='me-2'> Already have an account?</span>
-                                <Link to={'/login'} className="link link-accent link-animated hover:text-base-content">Login here</Link>
+                                <Link onClick={() => setTimeout(() => { handleGotoSection('loginRef') }, 100)} to={'/login'} className="link link-accent link-animated hover:text-base-content">Login here</Link>
                             </div>
                         </div>
                     </div>

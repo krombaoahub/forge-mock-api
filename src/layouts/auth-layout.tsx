@@ -8,7 +8,7 @@ const AuthLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
         <div className="flex flex-col mx-auto ">
             <Header />
-            <main className="sm:mt-18 mt-8 min-h-dvh items-center flex m-auto max-w-md text-center">
+            <main className="sm:mt-18 mt-8 min-h-dvh items-center flex m-auto  text-center">
                 <div>{children}</div>
             </main>
             <Footer />

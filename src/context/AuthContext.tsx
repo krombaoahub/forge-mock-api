@@ -35,7 +35,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         signOut(auth)
             .then(() => {
                 navigate("/");
-                console.log("Signed out successfully")
             })
             .catch((error) => setErrorMsg(error.message))
             .finally(() => setLoading(false))

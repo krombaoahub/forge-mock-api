@@ -4,7 +4,6 @@ import './index.css'
 import App from './App.tsx'
 import { AuthProvider } from './context/AuthContext.tsx'
 import { BrowserRouter as Router } from 'react-router-dom'
-import { ProjectProvider } from './context/ProjectContext.tsx'
 import { AppProvider } from './context/AppContext.tsx'
 
 createRoot(document.getElementById('root')!).render(

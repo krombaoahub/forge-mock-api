@@ -1,20 +1,20 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-async function loadFlyOnUI() {
-    return import('flyonui/flyonui');
-}
+// async function loadFlyOnUI() {
+//     return import('flyonui/flyonui');
+// }
 
 export function useFlyOnUI() {
     const { pathname } = useLocation()
 
-    useEffect(() => {
-        const initFlyOnUI = async () => {
-            await loadFlyOnUI();
-        };
+    // useEffect(() => {
+    //     const initFlyOnUI = async () => {
+    //         await loadFlyOnUI();
+    //     };
 
-        initFlyOnUI();
-    }, []);
+    //     initFlyOnUI();
+    // }, []);
 
     useEffect(() => {
         setTimeout(() => {
