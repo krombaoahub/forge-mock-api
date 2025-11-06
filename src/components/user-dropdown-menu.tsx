@@ -27,15 +27,17 @@ export function UserAvatar({ displayInfo }: UserAvatarProps) {
         </div>
     )
 }
-export function UserDropdownMenu() {
+export function UserDropdownMenu({ mobile }: { mobile?: boolean }) {
     const { handleLogout, loading } = useAuthContext();
     const navigate = useNavigate();
 
     return (
         <div className="dropdown relative inline-flex">
-            <button id="dropdown-avatar" type="button" className="p-0 border-0 dropdown-toggle btn btn-outline btn-primary flex items-center gap-2 rounded-full" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-                <UserAvatar />
-            </button>
+            {mobile
+                ? <div id="dropdown-avatar" className='link link-animated hover:text-base-content' aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">Profile</div>
+                : <button id="dropdown-avatar" type="button" className="p-0 border-0 dropdown-toggle btn btn-outline btn-primary flex items-center gap-2 rounded-full" aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                    <UserAvatar />
+                </button>}
             <ul className="dropdown-menu dropdown-open:opacity-100 hidden min-w-60 max-w-65" role="menu" aria-orientation="vertical" aria-labelledby="dropdown-avatar">
                 <li className="dropdown-header gap-3">
                     <UserAvatar displayInfo />
